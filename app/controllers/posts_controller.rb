@@ -1,8 +1,12 @@
 class PostsController < ApplicationController
 
   def new
-    @post = Post.new
-    @post.place_id = params["place_id"]
+    if @current_user
+      @post = Post.new
+      @post.place_id = params["place_id"]
+    else
+      redirect_to "/login"
+    end
   end
 
   def create
